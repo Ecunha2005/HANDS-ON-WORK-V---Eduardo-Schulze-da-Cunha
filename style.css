@@ -1,0 +1,1163 @@
+/* ============================================================
+   RESET E VARIÁVEIS GLOBAIS
+   O reset garante que todos os elementos comecem sem margens
+   ou espaçamentos padrão do navegador.
+   As variáveis (--nome) facilitam reutilizar as cores.
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --cream:   #FAF5ED; /* fundo geral, bege claro */
+  --sand:    #E8D5B5; /* bege médio, bordas suaves */
+  --gold:    #C49A5A; /* dourado, detalhes e destaques */
+  --teal:    #2A6E7A; /* verde-azulado, cor principal */
+  --teal-dk: #1D4F59; /* verde-azulado escuro, títulos */
+  --coral:   #D4705A; /* coral, ênfases e badges */
+  --bark:    #5A3E2B; /* marrom, textos secundários */
+  --text:    #2A2016; /* quase preto, texto principal */
+  --muted:   #7A6C5A; /* cinza-bege, texto de apoio */
+  --white:   #FFFEF9; /* branco quente, fundo de cards */
+}
+
+html {
+  scroll-behavior: smooth; /* rolagem suave ao navegar */
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  overflow-x: hidden; /* evita scroll horizontal indesejado */
+}
+
+/* Títulos usam a fonte serifada para elegância */
+h1, h2, h3, h4 {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+
+/* ============================================================
+   NAVEGAÇÃO
+   Fixada no topo com efeito de vidro fosco (backdrop-filter)
+   ============================================================ */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100; /* fica na frente de tudo */
+  background: rgba(250, 245, 237, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(196, 154, 90, 0.2);
+  transition: all 0.4s;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+/* Logo em duas linhas: nome e subtítulo */
+.nav-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+.nav-logo span:first-child {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--teal-dk);
+  letter-spacing: 0.04em;
+}
+.nav-logo span:last-child {
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* Links do menu desktop */
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--bark);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s;
+}
+
+/* Linha animada embaixo do link ao passar o mouse */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--coral);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--coral); }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: var(--teal); }
+.nav-links a.active::after { width: 100%; background: var(--teal); }
+
+/* Botão "Contato" com fundo colorido */
+.nav-cta {
+  background: var(--teal);
+  color: var(--white) !important;
+  padding: 0.55rem 1.4rem;
+  border-radius: 2px;
+  letter-spacing: 0.1em !important;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover { background: var(--teal-dk) !important; }
+
+/* Botão hamburguer — só aparece no mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: var(--bark);
+  transition: 0.3s;
+}
+
+/* Animação de "X" quando o menu está aberto */
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* Menu mobile (oculto por padrão) */
+.mobile-menu {
+  display: none;
+}
+.mobile-menu.open {
+  display: flex;
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  background: rgba(250, 245, 237, 0.98);
+  backdrop-filter: blur(12px);
+  padding: 2rem;
+  z-index: 99;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--sand);
+}
+.mobile-menu a {
+  text-decoration: none;
+  color: var(--bark);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--sand);
+  transition: color 0.3s;
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--teal); }
+
+
+/* ============================================================
+   SISTEMA DE PÁGINAS
+   Só a página com a classe "active" fica visível
+   ============================================================ */
+.page { display: none; }
+.page.active { display: block; }
+
+
+/* ============================================================
+   HERO — SEÇÃO PRINCIPAL DA HOME
+   Layout em duas colunas: texto | imagem
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding-top: 72px; /* compensa a altura do menu fixo */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fundo decorativo com gradientes radiais */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 70% at 70% 50%, rgba(42,110,122,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(196,154,90,.1) 0%, transparent 50%);
+}
+.hero-bg::before, .hero-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  right: 8%;
+  transform: translateY(-50%);
+  border: 1px solid rgba(196, 154, 90, 0.15);
+}
+.hero-bg::before { width: 500px; height: 500px; }
+.hero-bg::after  { width: 350px; height: 350px; right: 14%; border-color: rgba(196,154,90,.1); }
+
+/* Conteúdo de texto */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 4rem 6rem 5rem;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+.hero-tag::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* Título grande com clamp() para ser responsivo */
+.hero-title {
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--teal-dk);
+  margin-bottom: 1rem;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--coral);
+  font-weight: 300;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 420px;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Imagem decorativa */
+.hero-image-wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 3rem;
+}
+.hero-visual {
+  width: 400px;
+  height: 480px;
+  position: relative;
+}
+.hero-main-img {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #E8D5B5 0%, #C49A5A33 50%, #2A6E7A22 100%);
+  border-radius: 60% 40% 50% 50% / 40% 50% 50% 60%; /* forma orgânica */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-main-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,.4) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(42,110,122,.1) 0%, transparent 50%);
+}
+.hero-shell-icon {
+  width: 180px;
+  height: 180px;
+  opacity: 0.25;
+}
+
+/* Selos flutuantes na imagem */
+.badge {
+  position: absolute;
+  background: var(--white);
+  border-radius: 8px;
+  padding: 0.75rem 1.1rem;
+  box-shadow: 0 8px 32px rgba(42,110,122,.12);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  animation: float 4s ease-in-out infinite;
+}
+.badge-1 { top: 15%; right: -10%; }
+.badge-2 { bottom: 20%; left: -12%; animation-delay: 1.5s; }
+.badge-icon { font-size: 1.5rem; }
+.badge-text { font-size: 0.72rem; font-weight: 500; color: var(--teal-dk); }
+.badge-text small { display: block; color: var(--muted); font-size: 0.65rem; font-weight: 400; }
+
+
+/* ============================================================
+   BARRA DE NÚMEROS
+   ============================================================ */
+.stats-bar {
+  background: var(--teal-dk);
+  padding: 2rem 0;
+}
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.stat-item {
+  text-align: center;
+  color: var(--white);
+}
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--sand);
+  display: block;
+}
+.stat-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--teal);
+  color: var(--white);
+  padding: 0.9rem 2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.3s, transform 0.2s;
+  text-decoration: none;
+}
+.btn-primary:hover { background: var(--teal-dk); transform: translateY(-2px); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--bark);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0.9rem 0.5rem;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+.btn-ghost:hover { color: var(--coral); }
+.btn-ghost svg { transition: transform 0.3s; }
+.btn-ghost:hover svg { transform: translateX(4px); }
+
+.btn-buy {
+  background: var(--teal);
+  color: var(--white);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background 0.3s;
+  font-family: 'Jost', sans-serif;
+}
+.btn-buy:hover { background: var(--coral); }
+
+
+/* ============================================================
+   SEÇÕES DE TEXTO (título, subtítulo, tag)
+   ============================================================ */
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.section-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  color: var(--teal-dk);
+  line-height: 1.2;
+}
+.section-title em { font-style: italic; color: var(--coral); }
+.section-sub {
+  margin: 0.75rem auto 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 300;
+  max-width: 480px;
+  line-height: 1.8;
+}
+
+
+/* ============================================================
+   CARDS DE PRODUTOS
+   ============================================================ */
+.product-card {
+  background: var(--white);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(42,110,122,.12);
+}
+
+/* Área da imagem */
+.card-img {
+  height: 240px;
+  position: relative;
+  overflow: hidden;
+}
+.card-img-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s;
+  font-size: 5rem;
+}
+.product-card:hover .card-img-inner { transform: scale(1.06); }
+
+.card-img-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* preenche sem distorcer */
+  border-radius: 8px; /* opcional, arredonda as bordas */
+}
+
+/* Badge (etiqueta) no canto da imagem */
+.card-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--coral); /* cor padrão; pode ser sobrescrita inline */
+  color: var(--white);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.7rem;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+/* Corpo do card */
+.card-body { padding: 1.25rem 1.5rem 1.5rem; }
+.card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--teal-dk);
+  margin-bottom: 0.3rem;
+}
+.card-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--teal);
+}
+.card-price small {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+
+/* ============================================================
+   GRADE DE PRODUTOS EM DESTAQUE (home)
+   ============================================================ */
+.featured {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+
+/* ============================================================
+   GRADE COMPLETA DE PRODUTOS
+   auto-fill: preenche com quantas colunas couberem
+   ============================================================ */
+.products-hero {
+  background: linear-gradient(to bottom, var(--cream), var(--sand));
+  padding: 7rem 2rem 4rem;
+  text-align: center;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem 6rem;
+}
+
+
+/* ============================================================
+   ABAS DE FILTRO
+   ============================================================ */
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem 2rem 0;
+  flex-wrap: wrap;
+}
+.filter-tab {
+  background: transparent;
+  border: 1px solid var(--sand);
+  color: var(--muted);
+  padding: 0.5rem 1.4rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: 'Jost', sans-serif;
+  transition: all 0.3s;
+}
+.filter-tab.active,
+.filter-tab:hover {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--white);
+}
+
+
+/* ============================================================
+   FAIXA ESCURA (nature strip)
+   ============================================================ */
+.nature-strip {
+  background: linear-gradient(135deg, var(--teal-dk) 0%, #1A4A55 100%);
+  padding: 5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.nature-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(196,154,90,.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 50%, rgba(196,154,90,.08) 0%, transparent 40%);
+}
+.nature-strip-content { position: relative; z-index: 1; }
+.nature-strip h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  color: var(--sand);
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+.nature-strip h2 em { color: var(--coral); font-style: italic; }
+.nature-strip p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  font-weight: 300;
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.8;
+}
+
+/* Ícones de pilares */
+.pillars {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+.pillar { color: var(--white); text-align: center; }
+.pillar-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.pillar-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.7; }
+
+
+/* ============================================================
+   PÁGINA SOBRE
+   ============================================================ */
+.about-hero {
+  background: linear-gradient(135deg, var(--teal-dk) 0%, #24606D 100%);
+  padding: 8rem 2rem 6rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.about-hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); color: var(--sand); font-weight: 300; }
+.about-hero h1 em { color: #FFD9C9; }
+.about-hero p { color: rgba(255,255,255,.65); font-size: 1rem; font-weight: 300; margin-top: 0.75rem; line-height: 1.8; }
+
+/* Layout em duas colunas: foto | texto */
+.about-story {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+/* Moldura da foto */
+.about-img-frame {
+  width: 100%;
+  aspect-ratio: 4/5;
+  background: linear-gradient(135deg, #E8D5B5 0%, #C49A5A44 100%);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8rem;
+  position: relative;
+  overflow: hidden;
+}
+.about-img-frame::after {
+  content: '';
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  border: 1px solid rgba(196,154,90,.25);
+  border-radius: 2px;
+}
+.frame-accent {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-right: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+  bottom: -16px;
+  right: -16px;
+}
+
+/* Texto da história */
+.about-text .section-tag,
+.about-text .section-title,
+.about-text .section-sub {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+.about-text h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 300;
+  color: var(--teal-dk);
+  margin: 1rem 0;
+  line-height: 1.3;
+}
+.about-text h2 em { font-style: italic; color: var(--coral); }
+.about-body {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.9;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+}
+
+/* Lista de valores */
+.values-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+.values-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.88rem;
+  color: var(--bark);
+  font-weight: 500;
+}
+.value-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(42,110,122,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* Etapas do processo de criação */
+.process {
+  background: var(--white);
+  padding: 5rem 2rem;
+}
+.process-inner { max-width: 1100px; margin: 0 auto; }
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+  position: relative;
+}
+
+/* Linha horizontal decorativa entre os passos */
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--sand), transparent);
+}
+
+.process-step { text-align: center; position: relative; }
+.step-num {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 1px solid var(--sand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+.step-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--teal-dk);
+  margin-bottom: 0.4rem;
+}
+.step-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
+
+
+/* ============================================================
+   PÁGINA DE CONTATO
+   ============================================================ */
+.contact-hero {
+  background: linear-gradient(135deg, #2A6E7A 0%, #3A8090 100%);
+  padding: 8rem 2rem 5rem;
+  text-align: center;
+}
+.contact-hero h1 { font-size: clamp(2rem, 4vw, 3.2rem); color: var(--sand); font-weight: 300; }
+.contact-hero h1 em { color: #FFD9C9; }
+.contact-hero p { color: rgba(255,255,255,.65); font-size: 0.95rem; font-weight: 300; margin-top: 0.75rem; line-height: 1.8; }
+
+/* Duas colunas: formulário | informações */
+.contact-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5rem 2rem 7rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* Campos do formulário */
+.form-group { margin-bottom: 1.5rem; }
+.form-label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bark);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  background: var(--white);
+  border: 1px solid var(--sand);
+  border-radius: 2px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  outline: none;
+}
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(42,110,122,.08);
+}
+.form-textarea { min-height: 140px; resize: vertical; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.btn-submit {
+  width: 100%;
+  background: var(--teal);
+  color: var(--white);
+  border: none;
+  padding: 1rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: 'Jost', sans-serif;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 0.5rem;
+}
+.btn-submit:hover { background: var(--teal-dk); transform: translateY(-2px); }
+
+/* Cards de informações de contato */
+.contact-info { display: flex; flex-direction: column; gap: 2rem; }
+.info-card {
+  background: var(--white);
+  border-radius: 4px;
+  padding: 1.75rem;
+  border-left: 3px solid var(--teal);
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.info-icon { font-size: 1.6rem; flex-shrink: 0; }
+.info-text { flex: 1; }
+.info-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.info-value { font-size: 0.95rem; color: var(--teal-dk); font-weight: 500; }
+.info-value small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 300;
+  margin-top: 0.2rem;
+}
+.info-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--teal);
+  font-size: 0.8rem;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(42,110,122,.3);
+  transition: border-color 0.3s, color 0.3s;
+}
+.info-link:hover { color: var(--coral); border-color: var(--coral); }
+
+/* Redes sociais */
+.social-links { background: var(--white); border-radius: 4px; padding: 1.75rem; }
+.social-title {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+.social-grid { display: flex; gap: 0.75rem; }
+.social-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 1rem;
+  border: 1px solid var(--sand);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--bark);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+.social-btn:hover { background: var(--teal); color: var(--white); border-color: var(--teal); }
+.social-btn-icon { font-size: 1.5rem; }
+
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+footer {
+  background: var(--text);
+  color: rgba(255, 255, 255, 0.5);
+  padding: 4rem 2rem;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+}
+.footer-brand p { font-size: 0.82rem; line-height: 1.8; max-width: 280px; }
+.footer-col h4 {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--sand);
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-links a {
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  font-size: 0.82rem;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+.footer-links a:hover { color: var(--sand); }
+.footer-bottom {
+  max-width: 1200px;
+  margin: 3rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+
+/* ============================================================
+   BOTÃO FLUTUANTE DO WHATSAPP
+   ============================================================ */
+.wa-fab {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(37,211,102,.35);
+  text-decoration: none;
+  z-index: 999;
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+.wa-fab:hover { transform: scale(1.1); box-shadow: 0 12px 32px rgba(37,211,102,.5); }
+.wa-fab svg { width: 30px; height: 30px; fill: white; }
+
+
+/* ============================================================
+   TOAST (mensagem temporária na tela)
+   ============================================================ */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px); /* começa escondido */
+  background: var(--teal-dk);
+  color: var(--white);
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  z-index: 9999;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0); /* sobe para aparecer */
+}
+
+
+/* ============================================================
+   ANIMAÇÃO: FADE-IN AO ROLAR A PÁGINA
+   Elementos com a classe "fade-in" ficam invisíveis até
+   entrarem na tela, quando recebem a classe "visible"
+   ============================================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ============================================================
+   KEYFRAMES (animações)
+   ============================================================ */
+
+/* Surgir de baixo para cima */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Flutuação suave dos selos no hero */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* Pulsação do botão do WhatsApp */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(37,211,102,.35); }
+  50%       { box-shadow: 0 8px 36px rgba(37,211,102,.6); }
+}
+
+
+/* ============================================================
+   RESPONSIVIDADE — TELAS MÉDIAS (até 900px, ex: tablets)
+   ============================================================ */
+@media (max-width: 900px) {
+
+  /* Esconde o menu desktop, mostra o hamburguer */
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  /* Hero em coluna única, sem a imagem */
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-content { padding: 2rem 1.5rem 3rem; }
+  .hero-image-wrap { display: none; }
+
+  /* Grade de destaques em 2 colunas */
+  .featured-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Sobre em coluna única, sem a imagem */
+  .about-story { grid-template-columns: 1fr; gap: 2rem; }
+  .about-visual { display: none; }
+
+  /* Contato em coluna única */
+  .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
+
+  /* Processo em 2 colunas */
+  .process-steps { grid-template-columns: 1fr 1fr; }
+  .process-steps::before { display: none; }
+
+  /* Rodapé em coluna única */
+  .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+
+  /* Formulário em coluna única */
+  .form-row { grid-template-columns: 1fr; }
+
+  .pillars { gap: 2rem; }
+}
+
+
+/* ============================================================
+   RESPONSIVIDADE — TELAS PEQUENAS (até 580px, ex: celulares)
+   ============================================================ */
+@media (max-width: 580px) {
+  .featured-grid { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: 1fr; }
+  .stats-inner { gap: 1.5rem; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+}

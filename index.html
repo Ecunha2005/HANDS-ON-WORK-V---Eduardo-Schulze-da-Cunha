@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Maike Schulze – Joias Artesanais</title>
+
+  <!-- Fontes do Google: Cormorant para títulos, Jost para texto -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ============================================================
+     MENU DE NAVEGAÇÃO
+     Fixo no topo. Em telas pequenas, o menu vira hamburguer.
+     ============================================================ -->
+<nav id="navbar">
+  <div class="nav-inner">
+
+    <!-- Logo clicável que leva para a home -->
+    <a class="nav-logo" onclick="showPage('home')">
+      <span>Maike Schulze</span>
+      <span>Joias Artesanais</span>
+    </a>
+
+    <!-- Links de navegação — visíveis só em telas grandes -->
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home')"     data-page="home"     class="active">Início</a></li>
+      <li><a href="#" onclick="showPage('produtos')" data-page="produtos">Produtos</a></li>
+      <li><a href="#" onclick="showPage('sobre')"    data-page="sobre">Nossa História</a></li>
+      <li><a href="#" onclick="showPage('contato')"  data-page="contato" class="nav-cta">Contato</a></li>
+    </ul>
+
+    <!-- Botão hamburguer — visível só em telas pequenas -->
+    <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+  <!-- Menu mobile: aparece ao clicar no hamburguer -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#" onclick="showPage('home');    closeMenu()">Início</a>
+    <a href="#" onclick="showPage('produtos');closeMenu()">Produtos</a>
+    <a href="#" onclick="showPage('sobre');   closeMenu()">Nossa História</a>
+    <a href="#" onclick="showPage('contato'); closeMenu()">Contato</a>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     PÁGINA: HOME
+     A classe "active" faz ela aparecer. As outras ficam ocultas.
+     ============================================================ -->
+<div class="page active" id="page-home">
+
+  <!-- SEÇÃO HERO: banner principal com texto e imagem decorativa -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+
+    <!-- Texto do lado esquerdo -->
+    <div class="hero-content">
+      <div class="hero-tag">🐚 Feito à mão no litoral</div>
+
+      <h1 class="hero-title">
+        Joias que<br>
+        carregam a<br>
+        <em>alma do mar</em>
+      </h1>
+
+      <p class="hero-subtitle">
+        Cada peça é criada artesanalmente com conchas colhidas na região litorânea,
+        transformando a natureza em arte única e exclusiva.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('produtos')">
+          Ver Coleção
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12,5 19,12 12,19"/>
+          </svg>
+        </button>
+        <button class="btn-ghost" onclick="showPage('sobre')">
+          Conheça a artesã
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12,5 19,12 12,19"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Imagem decorativa do lado direito -->
+    <div class="hero-image-wrap">
+      <div class="hero-visual">
+        <div class="hero-main-img">
+          <!-- SVG decorativo de concha -->
+          <svg class="hero-shell-icon" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 180 C60 180 20 150 20 100 C20 50 60 20 100 20 C140 20 180 50 180 100" stroke="#2A6E7A" stroke-width="2" fill="none"/>
+            <path d="M100 160 C65 160 35 135 35 100 C35 65 65 40 100 40" stroke="#C49A5A" stroke-width="1.5" fill="none"/>
+            <path d="M100 140 C70 140 50 120 50 100 C50 80 70 60 100 60" stroke="#2A6E7A" stroke-width="1" fill="none"/>
+            <circle cx="100" cy="100" r="8" fill="#C49A5A" opacity=".6"/>
+            <path d="M100 100 L180 100 M100 100 L155 55 M100 100 L155 145 M100 100 L120 175 M100 100 L120 25" stroke="#2A6E7A" stroke-width=".8" opacity=".4"/>
+          </svg>
+        </div>
+
+        <!-- Selos flutuantes -->
+        <div class="badge badge-1">
+          <span class="badge-icon">✨</span>
+          <div class="badge-text">
+            100% Artesanal
+            <small>Feito à mão</small>
+          </div>
+        </div>
+        <div class="badge badge-2">
+          <span class="badge-icon">🐚</span>
+          <div class="badge-text">
+            Conchas Naturais
+            <small>Do litoral de SC</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BARRA DE NÚMEROS / DIFERENCIAIS -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Artesanal</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">+20</span>
+        <span class="stat-label">Modelos únicos</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">SC</span>
+        <span class="stat-label">Litoral Catarinense</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">🤍</span>
+        <span class="stat-label">Feito com amor</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO: PRODUTOS EM DESTAQUE (aparece ao rolar — fade-in) -->
+  <section class="featured fade-in">
+    <div class="section-header">
+      <span class="section-tag">Destaque da Semana</span>
+      <h2 class="section-title">Peças em <em>evidência</em></h2>
+      <p class="section-sub">Escolhas especiais que combinam o melhor do artesanato com a beleza natural das conchas</p>
+    </div>
+
+    <!-- Grade com 3 produtos em destaque (fixos, não gerados pelo JS) -->
+    <div class="featured-grid">
+
+      <div class="product-card">
+        <div class="card-img" style="background: linear-gradient(135deg,#E8D5B5,#C49A5A44);">
+          <div class="card-img-inner"><img src="SEREIA.png" style="width: 100%; height: 300px; object-fit: cover; display: block;"" /></div>
+          <span class="card-badge">Novo</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Colar Sereia</div>
+          <p class="card-desc">Colar delicado com conchinhas brancas e fio dourado. Peça única e exclusiva.</p>
+          <div class="card-footer">
+            <div class="card-price">R$ 65<small>,00</small></div>
+            <button class="btn-buy" onclick="openWhatsApp('Colar Sereia - R$ 65,00')">🛒 Comprar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="card-img" style="background: linear-gradient(135deg,#D4E8E8,#2A6E7A33);">
+          <div class="card-img-inner"><img src="CONCHA.png" style="width: 100%; height: 300px; object-fit: cover; display: block;"" /></div>
+          <span class="card-badge" style="background:var(--teal)">Popular</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Corrente de Cabeça</div>
+          <p class="card-desc">Tiara artesanal com conchas coloridas, perfeita para o verão e dias de praia.</p>
+          <div class="card-footer">
+            <div class="card-price">R$ 45<small>,00</small></div>
+            <button class="btn-buy" onclick="openWhatsApp('Corrente de Cabeça - R$ 45,00')">🛒 Comprar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="card-img" style="background: linear-gradient(135deg,#F5E6D3,#D4705A33);">
+          <div class="card-img-inner"><img src="JOIA.png" style="width: 100%; height: 300px; object-fit: cover; display: block;"" /></div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Conjunto Praiano</div>
+          <p class="card-desc">Kit com brincos e pulseira de conchas. Combinação perfeita para o dia a dia.</p>
+          <div class="card-footer">
+            <div class="card-price">R$ 80<small>,00</small></div>
+            <button class="btn-buy" onclick="openWhatsApp('Conjunto Praiano - R$ 80,00')">🛒 Comprar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Botão para ver todos os produtos -->
+    <div style="text-align:center; margin-top:3rem;">
+      <button class="btn-primary" onclick="showPage('produtos')">
+        Ver todos os produtos
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12,5 19,12 12,19"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- FAIXA ESCURA: frase de impacto e diferenciais -->
+  <div class="nature-strip">
+    <div class="nature-strip-content">
+      <h2>Natureza transformada em <em>arte</em></h2>
+      <p>Cada concha carrega a história do mar. Em nossas mãos, ela se torna uma peça única que você pode levar consigo aonde for.</p>
+      <div class="pillars">
+        <div class="pillar"><div class="pillar-icon">🌿</div><div class="pillar-label">Sustentável</div></div>
+        <div class="pillar"><div class="pillar-icon">🤝</div><div class="pillar-label">Exclusivo</div></div>
+        <div class="pillar"><div class="pillar-icon">💎</div><div class="pillar-label">Qualidade</div></div>
+        <div class="pillar"><div class="pillar-icon">❤️</div><div class="pillar-label">Com amor</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RODAPÉ DA HOME -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:1rem;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:#E8D5B5;">Maike Schulze</span>
+          <span style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:#C49A5A;font-weight:500;">Joias Artesanais</span>
+        </div>
+        <p>Joias artesanais feitas com conchas colhidas no litoral catarinense. Peças únicas, criadas com amor e dedicação.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul class="footer-links">
+          <li><a onclick="showPage('home')">Início</a></li>
+          <li><a onclick="showPage('produtos')">Produtos</a></li>
+          <li><a onclick="showPage('sobre')">Nossa História</a></li>
+          <li><a onclick="showPage('contato')">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/5547999799910" target="_blank">WhatsApp</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Maike Schulze – Joias Artesanais.</span>
+      <span>Desenvolvido com 💙 por Eduardo Schulze</span>
+    </div>
+  </footer>
+
+</div><!-- fim page-home -->
+
+
+<!-- ============================================================
+     PÁGINA: PRODUTOS
+     Os cards são gerados pelo JavaScript (função exibirProdutos)
+     ============================================================ -->
+<div class="page" id="page-produtos">
+
+  <!-- Cabeçalho da página -->
+  <div class="products-hero">
+    <span class="section-tag">Coleção Completa</span>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,5vw,3.5rem);font-weight:300;color:var(--teal-dk);margin-top:.5rem;">
+      Nossa <em style="font-style:italic;color:var(--coral)">Coleção</em>
+    </h1>
+    <p style="color:var(--muted);font-weight:300;margin-top:.75rem;font-size:.95rem;">
+      Peças exclusivas, criadas com conchas naturais do litoral catarinense
+    </p>
+  </div>
+
+  <!-- Abas de filtro por categoria -->
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filtrarProdutos(this,'todos')">Todos</button>
+    <button class="filter-tab"        onclick="filtrarProdutos(this,'colares')">Colares</button>
+    <button class="filter-tab"        onclick="filtrarProdutos(this,'pulseiras')">Pulseiras</button>
+    <button class="filter-tab"        onclick="filtrarProdutos(this,'brincos')">Brincos</button>
+    <button class="filter-tab"        onclick="filtrarProdutos(this,'conjuntos')">Conjuntos</button>
+    <button class="filter-tab"        onclick="filtrarProdutos(this,'tiaras')">Tiaras</button>
+  </div>
+
+  <!-- Aqui o JavaScript injeta os cards dos produtos -->
+  <div class="products-grid" id="productsGrid"></div>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:1rem;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:#E8D5B5;">Maike Schulze</span>
+          <span style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:#C49A5A;font-weight:500;">Joias Artesanais</span>
+        </div>
+        <p>Joias artesanais feitas com conchas colhidas no litoral catarinense.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul class="footer-links">
+          <li><a onclick="showPage('home')">Início</a></li>
+          <li><a onclick="showPage('produtos')">Produtos</a></li>
+          <li><a onclick="showPage('sobre')">Nossa História</a></li>
+          <li><a onclick="showPage('contato')">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/5547999799910" target="_blank">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Maike Schulze – Joias Artesanais.</span>
+      <span>Desenvolvido por Eduardo Schulze</span>
+    </div>
+  </footer>
+
+</div><!-- fim page-produtos -->
+
+
+<!-- ============================================================
+     PÁGINA: SOBRE
+     Conta a história da artesã
+     ============================================================ -->
+<div class="page" id="page-sobre">
+
+  <!-- Cabeçalho da página -->
+  <div class="about-hero">
+    <span class="section-tag" style="color:#C49A5A;">Nossa Essência</span>
+    <h1>A mulher por trás de<br>cada <em>peça única</em></h1>
+    <p>Uma história de amor, arte e o mar</p>
+  </div>
+
+  <!-- Bloco de história: foto à esquerda, texto à direita -->
+  <div class="about-story">
+
+    <!-- Foto / imagem decorativa -->
+    <div class="about-visual">
+      <div class="about-img-frame">
+         <img src="ARTESA.jpeg" style="width: 450px; height: auto;" />
+        <div class="frame-accent"></div>
+      </div>
+    </div>
+
+    <!-- Texto sobre a artesã -->
+    <div class="about-text">
+      <span class="section-tag">Quem somos</span>
+      <h2>Maike Schulze,<br><em>artesã do litoral</em></h2>
+
+      <p class="about-body">
+        Maike Cristiane Schulze da Cunha é uma empreendedora apaixonada pelo litoral catarinense
+        que encontrou na arte artesanal uma forma de transformar a beleza natural da região em joias únicas e exclusivas.
+      </p>
+      <p class="about-body">
+        Com suas mãos habilidosas, ela colhe conchas na orla e as transforma em colares, pulseiras, brincos e tiaras
+        que carregam a essência do mar — cada peça com sua história, cada detalhe pensado com cuidado e amor.
+      </p>
+      <p class="about-body">
+        Seu trabalho vai além do comércio: é uma forma de preservar a cultura litorânea e compartilhar
+        a beleza natural de Santa Catarina com turistas e moradores locais que buscam algo verdadeiramente especial.
+      </p>
+
+      <!-- Lista de valores da marca -->
+      <ul class="values-list">
+        <li><div class="value-dot">🌿</div><span><strong>Sustentabilidade</strong> – Conchas coletadas com respeito à natureza</span></li>
+        <li><div class="value-dot">✨</div><span><strong>Exclusividade</strong> – Nenhuma peça é igual à outra</span></li>
+        <li><div class="value-dot">💎</div><span><strong>Qualidade</strong> – Materiais selecionados e acabamento impecável</span></li>
+        <li><div class="value-dot">❤️</div><span><strong>Afeto</strong> – Cada joia criada com amor e dedicação</span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- PROCESSO DE CRIAÇÃO: 4 etapas -->
+  <div class="process fade-in">
+    <div class="process-inner">
+      <div class="section-header">
+        <span class="section-tag">Do Mar às suas Mãos</span>
+        <h2 class="section-title">Como cada peça <em>nasce</em></h2>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">🌊</div>
+          <div class="step-title">Coleta</div>
+          <p class="step-desc">As conchas são coletadas manualmente na praia, sempre com respeito ao ambiente e à natureza.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">✨</div>
+          <div class="step-title">Seleção</div>
+          <p class="step-desc">Cada concha é cuidadosamente selecionada por formato, cor e textura para compor as peças.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">🎨</div>
+          <div class="step-title">Criação</div>
+          <p class="step-desc">Com fios, arames e criatividade, Maike transforma as conchas em joias exclusivas e únicas.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">🎁</div>
+          <div class="step-title">Entrega</div>
+          <p class="step-desc">Cada peça é embalada com carinho e entregue com todo o amor que foi colocado em sua criação.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Faixa escura com CTA para contato -->
+  <div class="nature-strip">
+    <div class="nature-strip-content">
+      <h2>Quer uma peça <em>personalizada</em>?</h2>
+      <p>Entre em contato e vamos criar juntos a joia dos seus sonhos. Aceitamos pedidos especiais e encomendas exclusivas.</p>
+      <button class="btn-primary" onclick="showPage('contato')" style="margin-top:1.5rem;">
+        Falar com a Maike
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12,5 19,12 12,19"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:1rem;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:#E8D5B5;">Maike Schulze</span>
+          <span style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:#C49A5A;font-weight:500;">Joias Artesanais</span>
+        </div>
+        <p>Joias artesanais feitas com conchas colhidas no litoral catarinense.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul class="footer-links">
+          <li><a onclick="showPage('home')">Início</a></li>
+          <li><a onclick="showPage('produtos')">Produtos</a></li>
+          <li><a onclick="showPage('sobre')">Nossa História</a></li>
+          <li><a onclick="showPage('contato')">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/5547999799910" target="_blank">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Maike Schulze – Joias Artesanais.</span>
+      <span>Desenvolvido por Eduardo Schulze</span>
+    </div>
+  </footer>
+
+</div><!-- fim page-sobre -->
+
+
+<!-- ============================================================
+     PÁGINA: CONTATO
+     Formulário que envia mensagem via WhatsApp
+     ============================================================ -->
+<div class="page" id="page-contato">
+
+  <!-- Cabeçalho da página -->
+  <div class="contact-hero">
+    <span class="section-tag" style="color:#C49A5A;">Fale Conosco</span>
+    <h1>Vamos <em>conversar</em>?</h1>
+    <p>Estamos prontos para atender você e criar a peça perfeita</p>
+  </div>
+
+  <!-- Layout em duas colunas: formulário + informações de contato -->
+  <div class="contact-layout">
+
+    <!-- COLUNA 1: formulário -->
+    <div>
+      <div class="section-header" style="text-align:left;margin-bottom:2rem;">
+        <span class="section-tag" style="text-align:left;display:block;">Envie uma mensagem</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--teal-dk);">
+          Como posso <em style="font-style:italic;color:var(--coral)">ajudar?</em>
+        </h2>
+      </div>
+
+      <!-- Campos do formulário -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Seu nome</label>
+          <input type="text" class="form-input" placeholder="Maria Oliveira" id="cName"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Telefone / WhatsApp</label>
+          <input type="tel" class="form-input" placeholder="(47) 99999-9999" id="cPhone"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">E-mail</label>
+        <input type="email" class="form-input" placeholder="seu@email.com" id="cEmail"/>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Interesse</label>
+        <select class="form-select" id="cInterest">
+          <option value="">Selecione um produto...</option>
+          <option>Colar Sereia</option>
+          <option>Corrente de Cabeça</option>
+          <option>Pulseira de Conchas</option>
+          <option>Conjunto Praiano</option>
+          <option>Brincos Naturais</option>
+          <option>Peça personalizada</option>
+          <option>Outro</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Mensagem</label>
+        <textarea class="form-textarea" placeholder="Conte-nos sobre o que você está procurando, encomendas especiais, dúvidas..." id="cMessage"></textarea>
+      </div>
+
+      <!-- Botão envia via WhatsApp (função no script.js) -->
+      <button class="btn-submit" onclick="submitForm()">Enviar Mensagem 🐚</button>
+    </div>
+
+    <!-- COLUNA 2: informações de contato -->
+    <div class="contact-info">
+
+      <div class="info-card">
+        <div class="info-icon">📱</div>
+        <div class="info-text">
+          <div class="info-label">WhatsApp</div>
+          <div class="info-value">
+            (47) 99979-9910
+            <small>Resposta rápida, geralmente em minutos</small>
+          </div>
+          <a href="https://wa.me/5547999799910" target="_blank" class="info-link">Abrir WhatsApp →</a>
+        </div>
+      </div>
+
+      <div class="info-card" style="border-color:var(--coral);">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <div class="info-label">Localização</div>
+          <div class="info-value">
+            Litoral de Santa Catarina
+            <small>Atendimento e entrega na região litorânea</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card" style="border-color:var(--gold);">
+        <div class="info-icon">⏰</div>
+        <div class="info-text">
+          <div class="info-label">Disponibilidade</div>
+          <div class="info-value">
+            Seg – Sáb: 9h às 19h
+            <small>Encomendas com prazo combinado</small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:1rem;">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:600;color:#E8D5B5;">Maike Schulze</span>
+          <span style="font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:#C49A5A;font-weight:500;">Joias Artesanais</span>
+        </div>
+        <p>Joias artesanais feitas com conchas colhidas no litoral catarinense.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul class="footer-links">
+          <li><a onclick="showPage('home')">Início</a></li>
+          <li><a onclick="showPage('produtos')">Produtos</a></li>
+          <li><a onclick="showPage('sobre')">Nossa História</a></li>
+          <li><a onclick="showPage('contato')">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul class="footer-links">
+          <li><a href="https://wa.me/5547999799910" target="_blank">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Maike Schulze – Joias Artesanais.</span>
+      <span>Desenvolvido por Eduardo Schulze</span>
+    </div>
+  </footer>
+
+</div><!-- fim page-contato -->
+
+
+<!-- ============================================================
+     BOTÃO FLUTUANTE DO WHATSAPP (visível em todas as páginas)
+     ============================================================ -->
+<a href="https://wa.me/5547999799910" target="_blank" class="wa-fab" title="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- Mensagem temporária que aparece na tela (toast) -->
+<div class="toast" id="toast"></div>
+
+<!-- Script principal -->
+<script src="script.js"></script>
+
+</body>
+</html>
